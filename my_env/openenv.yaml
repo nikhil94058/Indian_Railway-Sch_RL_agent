@@ -1,7 +1,36 @@
 spec_version: 1
 name: my_env
+display_name: Indian Railway Scheduling Environment
+description: >
+  A production-grade RL environment for training LLM agents to schedule trains
+  on a realistic 32-station Indian Railways network. The agent must assign
+  departure times and platforms while avoiding head-on collisions, headway
+  violations, and platform conflicts across multiple weather zones.
 type: space
 runtime: fastapi
 app: server.app:app
 port: 8000
+tags:
+  - openenv
+  - reinforcement-learning
+  - scheduling
+  - railway
+
+tasks:
+  - id: easy_task_1
+    name: "Operation Fogbreaker: The GZB Convergence Trap"
+    difficulty: easy
+    max_steps: 8
+  - id: medium_task_2
+    name: "Operation Mughalsarai: The Bihar Bottleneck Breakdown"
+    difficulty: medium
+    max_steps: 15
+  - id: hard_task_3
+    name: "Operation Cyclone Exodus: East Coast Multi-Crisis"
+    difficulty: hard
+    max_steps: 30
+
+observation_space: TrainObservation
+action_space: TrainAction
+reward_range: [0.0, 1.0]
 

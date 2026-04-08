@@ -2,16 +2,14 @@
 title: Indian Railway Scheduling Environment
 emoji: 🚄
 colorFrom: blue
-colorTo: orange
+colorTo: yellow
 sdk: docker
 pinned: false
-app_port: 8000
-base_path: /web
 tags:
   - openenv
   - reinforcement-learning
   - railway-scheduling
-  - combinatorial-optimization
+base_path: /web
 ---
 
 # Indian Railway Scheduling — RL Environment
@@ -142,14 +140,18 @@ The agent sends a `TrainAction`:
 The physics engine returns a **continuous score in [0.0, 1.0]** — no sparse binary rewards:
 
 ```
-score = (conflict_free × 0.6) + (platform_valid × 0.2) + (journey_time × 0.2)
+score = (conflict_free × 0.40) + (journey_time × 0.20) + (platform_valid × 0.15)
+      + (headway_quality × 0.12) + (priority_respected × 0.08) + (dwell_valid × 0.05)
 ```
 
-| Component | Weight | Condition |
+| Component | Weight | What it measures |
 |---|---|---|
-| `conflict_free` | 60% | No head-on crashes, no headway violations, no track-capacity exhaustion |
-| `platform_valid` | 20% | Platform number ≤ station's maximum platform count |
-| `journey_time` | 20% | Journey completes within reasonable time bounds |
+| `conflict_free` | 40% | Binary — any HEAD_ON, REAR_END, OVERTAKE, PLATFORM_CLASH, or TRACK_FULL sets this to 0 |
+| `journey_time` | 20% | Continuous — fraction of segments physically achievable under weather conditions |
+| `platform_valid` | 15% | Binary — any platform number exceeding station capacity sets this to 0 |
+| `headway_quality` | 12% | Continuous — actual headway gap as fraction of required minimum (rewards wider margins) |
+| `priority_respected` | 8% | Continuous — fraction of priority interactions not violated |
+| `dwell_valid` | 5% | Continuous — fraction of intermediate stops with dwell within type-specific min/max |
 
 Scores ≥ 0.6 commit the train to the permanent timetable. Lower scores are recorded
 as failures in the knowledge base for the agent to learn from.
