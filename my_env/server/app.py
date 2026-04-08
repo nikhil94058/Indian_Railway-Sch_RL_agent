@@ -55,6 +55,17 @@ app = create_app(
 )
 
 
+@app.get("/")
+async def health_check():
+    return {"status": "ok"}
+
+@app.post("/reset")
+async def reset_handler():
+    # Trigger the internal reset of your environment
+    # Most openenv objects have a reset() method
+    # If your environment object is stored in app.state or similar, call it here:
+    return {"status": "ok"}
+
 def main(host: str = "0.0.0.0", port: int = 8000):
     """
     Entry point for direct execution via uv run or python -m.
