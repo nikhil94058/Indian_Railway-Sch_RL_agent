@@ -9,11 +9,9 @@ from typing import List, Dict, Tuple, Optional
 from collections import defaultdict
 
 from openenv.core.env_server import Environment, State
-from ..models import (
-    TrainAction, TrainObservation, TrainInfo,
-    StopTime, TrainRequest, TrainReward, RewardBreakdown, ScheduleProposal,
-)
-from ..data.config import (
+from my_env.models import TrainAction, TrainObservation, TrainInfo, StopTime, TrainRequest, TrainReward, RewardBreakdown, ScheduleProposal
+
+from my_env.data.config import (
     ZONE_WEATHER, TRAIN_SPECS, DEFAULT_TRAIN_SPEC,
     SCORE_WEIGHTS, PREFIX_TO_TYPE, infer_train_type,
 )
@@ -998,14 +996,19 @@ def grade_task(
     avg_score:        float,
 ) -> float:
     """
-    Grade a completed task.
-      50% completion rate  +  50% average physics quality
-    Returns a value in [0.0, 1.0].
+    Grade a completed task, ensuring the output is strictly between 0 and 1.
     """
     if trains_total == 0:
-        return 0.0
+        return 0.001  # Nudge from 0.0
+        
     completion = trains_scheduled / trains_total
-    return round(0.5 * completion + 0.5 * avg_score, 3)
+    raw_score = (0.5 * completion + 0.5 * avg_score)
+    
+    # Apply a safety margin to stay within (0, 1)
+    # This maps 0.0 -> 0.001 and 1.0 -> 0.999
+    clamped_score = max(0.001, min(0.999, raw_score))
+    
+    return round(clamped_score, 3)
 
 
 # ===================================================================

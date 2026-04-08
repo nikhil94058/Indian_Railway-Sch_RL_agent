@@ -36,8 +36,8 @@ except Exception as e:  # pragma: no cover
     ) from e
 
 try:
-    from ..models import TrainAction, TrainObservation
-    from .my_env_environment import TrainSchedulingEnv
+    from my_env.models import TrainObservation, TrainAction
+    from my_env.server.my_env_environment import TrainSchedulingEnv
     MyAction = TrainAction
     MyObservation = TrainObservation
 except ModuleNotFoundError:
@@ -59,39 +59,19 @@ app = create_app(
 async def health_check():
     return {"status": "ok"}
 
-@app.post("/reset")
-async def reset_handler():
-    # Trigger the internal reset of your environment
-    # Most openenv objects have a reset() method
-    # If your environment object is stored in app.state or similar, call it here:
-    return {"status": "ok"}
-
-def main(host: str = "0.0.0.0", port: int = 8000):
+def main():
     """
-    Entry point for direct execution via uv run or python -m.
-
-    This function enables running the server without Docker:
-        uv run --project . server
-        uv run --project . server --port 8001
-        python -m my_env.server.app
-
-    Args:
-        host: Host address to bind to (default: "0.0.0.0")
-        port: Port number to listen on (default: 8000)
-
-    For production deployments, consider using uvicorn directly with
-    multiple workers:
-        uvicorn my_env.server.app:app --workers 4
+    Standard entry point for OpenEnv multi-mode deployment.
     """
     import uvicorn
-
-    uvicorn.run(app, host=host, port=port)
-
-
-if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("--host", type=str, default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
-    main(port=args.port)
+
+    uvicorn.run(app, host=args.host, port=args.port)
+
+if __name__ == "__main__":
+    main()

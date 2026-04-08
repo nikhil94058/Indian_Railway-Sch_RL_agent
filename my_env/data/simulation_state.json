@@ -1,6 +1,6 @@
 {
-  "task_id": "b93adc04",
-  "step_count": 1,
+  "task_id": "1974b9c7",
+  "step_count": 13,
   "network_summary": {
     "stations": [
       {
@@ -455,9 +455,9 @@
   },
   "current_timetable": [
     {
-      "id": "PASS-01",
-      "name": "Service PASS-01",
-      "type": "Passenger",
+      "id": "RAJ-31",
+      "name": "Service RAJ-31",
+      "type": "Rajdhani",
       "days": [
         "Daily"
       ],
@@ -465,43 +465,708 @@
         {
           "station": "NDLS",
           "arrival": null,
-          "departure": "04:50",
+          "departure": "22:00",
           "platform": 1,
           "day_offset": 0
         },
         {
           "station": "GZB",
-          "arrival": "05:57",
-          "departure": "06:12",
-          "platform": 1,
+          "arrival": "23:02",
+          "departure": "23:04",
+          "platform": 2,
           "day_offset": 0
         },
         {
           "station": "ALJN",
+          "arrival": "00:18",
+          "departure": "00:20",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "TDL",
+          "arrival": "01:16",
+          "departure": "01:18",
+          "platform": 4,
+          "day_offset": 1
+        },
+        {
+          "station": "ETW",
+          "arrival": "02:23",
+          "departure": "02:25",
+          "platform": 5,
+          "day_offset": 1
+        },
+        {
+          "station": "CNB",
+          "arrival": "04:06",
+          "departure": "04:08",
+          "platform": 6,
+          "day_offset": 1
+        },
+        {
+          "station": "PRYJ",
+          "arrival": "06:25",
+          "departure": "06:27",
+          "platform": 7,
+          "day_offset": 1
+        },
+        {
+          "station": "MZP",
           "arrival": "07:32",
-          "departure": "07:47",
+          "departure": "07:34",
+          "platform": 2,
+          "day_offset": 1
+        },
+        {
+          "station": "DDU",
+          "arrival": "08:40",
+          "departure": "08:42",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "BXR",
+          "arrival": "09:59",
+          "departure": "10:01",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "ARA",
+          "arrival": "10:57",
+          "departure": "10:59",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "DNR",
+          "arrival": "11:44",
+          "departure": "11:46",
+          "platform": 6,
+          "day_offset": 1
+        },
+        {
+          "station": "PNBE",
+          "arrival": "12:09",
+          "departure": "12:11",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "BKP",
+          "arrival": "13:07",
+          "departure": "13:09",
+          "platform": 2,
+          "day_offset": 1
+        },
+        {
+          "station": "MKA",
+          "arrival": "13:59",
+          "departure": "14:01",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "KIUL",
+          "arrival": "14:46",
+          "departure": "14:48",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "JAJ",
+          "arrival": "15:54",
+          "departure": "15:56",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "JSME",
+          "arrival": "16:38",
+          "departure": "16:40",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "ASN",
+          "arrival": "18:12",
+          "departure": "18:14",
+          "platform": 5,
+          "day_offset": 1
+        },
+        {
+          "station": "HWH",
+          "arrival": "20:58",
+          "departure": "21:00",
+          "platform": 20,
+          "day_offset": 1
+        },
+        {
+          "station": "SRC",
+          "arrival": "21:38",
+          "departure": "21:40",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "KGP",
+          "arrival": "00:24",
+          "departure": "00:26",
+          "platform": 10,
+          "day_offset": 2
+        },
+        {
+          "station": "BLS",
+          "arrival": "03:19",
+          "departure": "03:21",
+          "platform": 3,
+          "day_offset": 2
+        },
+        {
+          "station": "BHC",
+          "arrival": "05:11",
+          "departure": "05:13",
+          "platform": 4,
+          "day_offset": 2
+        },
+        {
+          "station": "CTC",
+          "arrival": "08:15",
+          "departure": "08:17",
+          "platform": 5,
+          "day_offset": 2
+        },
+        {
+          "station": "BBS",
+          "arrival": "09:13",
+          "departure": null,
+          "platform": 2,
+          "day_offset": 2
+        }
+      ]
+    },
+    {
+      "id": "DUR-33",
+      "name": "Service DUR-33",
+      "type": "Duronto",
+      "days": [
+        "Daily"
+      ],
+      "stops": [
+        {
+          "station": "NDLS",
+          "arrival": null,
+          "departure": "23:00",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "GZB",
+          "arrival": "00:02",
+          "departure": "00:04",
+          "platform": 2,
+          "day_offset": 1
+        },
+        {
+          "station": "ALJN",
+          "arrival": "01:18",
+          "departure": "01:20",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "TDL",
+          "arrival": "02:16",
+          "departure": "02:18",
+          "platform": 4,
+          "day_offset": 1
+        },
+        {
+          "station": "ETW",
+          "arrival": "03:23",
+          "departure": "03:25",
+          "platform": 5,
+          "day_offset": 1
+        },
+        {
+          "station": "CNB",
+          "arrival": "05:06",
+          "departure": "05:08",
+          "platform": 6,
+          "day_offset": 1
+        },
+        {
+          "station": "PRYJ",
+          "arrival": "07:25",
+          "departure": "07:27",
+          "platform": 7,
+          "day_offset": 1
+        },
+        {
+          "station": "MZP",
+          "arrival": "08:32",
+          "departure": "08:34",
+          "platform": 2,
+          "day_offset": 1
+        },
+        {
+          "station": "DDU",
+          "arrival": "09:40",
+          "departure": "09:42",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "BXR",
+          "arrival": "10:59",
+          "departure": "11:01",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "ARA",
+          "arrival": "11:57",
+          "departure": "11:59",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "DNR",
+          "arrival": "12:44",
+          "departure": "12:46",
+          "platform": 6,
+          "day_offset": 1
+        },
+        {
+          "station": "PNBE",
+          "arrival": "13:09",
+          "departure": "13:11",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "BKP",
+          "arrival": "14:07",
+          "departure": "14:09",
+          "platform": 2,
+          "day_offset": 1
+        },
+        {
+          "station": "MKA",
+          "arrival": "14:59",
+          "departure": "15:01",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "KIUL",
+          "arrival": "15:46",
+          "departure": "15:48",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "JAJ",
+          "arrival": "16:54",
+          "departure": "16:56",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "JSME",
+          "arrival": "17:38",
+          "departure": "17:40",
+          "platform": 3,
+          "day_offset": 1
+        },
+        {
+          "station": "ASN",
+          "arrival": "19:12",
+          "departure": "19:14",
+          "platform": 5,
+          "day_offset": 1
+        },
+        {
+          "station": "HWH",
+          "arrival": "21:58",
+          "departure": null,
+          "platform": 20,
+          "day_offset": 1
+        }
+      ]
+    },
+    {
+      "id": "EXP-12",
+      "name": "Service EXP-12",
+      "type": "Express",
+      "days": [
+        "Daily"
+      ],
+      "stops": [
+        {
+          "station": "HWH",
+          "arrival": null,
+          "departure": "08:00",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "SRC",
+          "arrival": "08:38",
+          "departure": "08:43",
+          "platform": 2,
+          "day_offset": 0
+        },
+        {
+          "station": "KGP",
+          "arrival": "11:27",
+          "departure": "11:37",
+          "platform": 3,
+          "day_offset": 0
+        },
+        {
+          "station": "BLS",
+          "arrival": "14:25",
+          "departure": "14:30",
+          "platform": 4,
+          "day_offset": 0
+        },
+        {
+          "station": "BHC",
+          "arrival": "16:20",
+          "departure": "16:25",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "CTC",
+          "arrival": "19:27",
+          "departure": "19:32",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "BBS",
+          "arrival": "20:28",
+          "departure": "20:33",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "KUR",
+          "arrival": "21:20",
+          "departure": "21:25",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "BAM",
+          "arrival": "01:39",
+          "departure": "01:44",
+          "platform": 1,
+          "day_offset": 1
+        },
+        {
+          "station": "VSKP",
+          "arrival": "08:58",
+          "departure": null,
+          "platform": 2,
+          "day_offset": 1
+        }
+      ]
+    },
+    {
+      "id": "DUR-14",
+      "name": "Service DUR-14",
+      "type": "Duronto",
+      "days": [
+        "Daily"
+      ],
+      "stops": [
+        {
+          "station": "HWH",
+          "arrival": null,
+          "departure": "08:30",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "SRC",
+          "arrival": "09:08",
+          "departure": "09:10",
+          "platform": 2,
+          "day_offset": 0
+        },
+        {
+          "station": "KGP",
+          "arrival": "11:54",
+          "departure": "12:01",
+          "platform": 3,
+          "day_offset": 0
+        },
+        {
+          "station": "BLS",
+          "arrival": "14:49",
+          "departure": "14:51",
+          "platform": 4,
+          "day_offset": 0
+        },
+        {
+          "station": "BHC",
+          "arrival": "16:41",
+          "departure": "16:43",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "CTC",
+          "arrival": "19:45",
+          "departure": "19:47",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "BBS",
+          "arrival": "20:43",
+          "departure": null,
+          "platform": 1,
+          "day_offset": 0
+        }
+      ]
+    },
+    {
+      "id": "FR-13",
+      "name": "Service FR-13",
+      "type": "Freight",
+      "days": [
+        "Daily"
+      ],
+      "stops": [
+        {
+          "station": "ASN",
+          "arrival": null,
+          "departure": "09:30",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "HWH",
+          "arrival": "12:52",
+          "departure": "13:07",
+          "platform": 2,
+          "day_offset": 0
+        },
+        {
+          "station": "SRC",
+          "arrival": "14:00",
+          "departure": "14:15",
+          "platform": 3,
+          "day_offset": 0
+        },
+        {
+          "station": "KGP",
+          "arrival": "16:44",
+          "departure": "16:59",
+          "platform": 4,
+          "day_offset": 0
+        },
+        {
+          "station": "BLS",
+          "arrival": "19:52",
+          "departure": "20:07",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "BHC",
+          "arrival": "22:57",
+          "departure": null,
+          "platform": 2,
+          "day_offset": 0
+        }
+      ]
+    },
+    {
+      "id": "EXP-16",
+      "name": "Service EXP-16",
+      "type": "Express",
+      "days": [
+        "Daily"
+      ],
+      "stops": [
+        {
+          "station": "KGP",
+          "arrival": null,
+          "departure": "09:30",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "BLS",
+          "arrival": "12:23",
+          "departure": "12:28",
+          "platform": 2,
+          "day_offset": 0
+        },
+        {
+          "station": "BHC",
+          "arrival": "14:18",
+          "departure": "14:23",
+          "platform": 3,
+          "day_offset": 0
+        },
+        {
+          "station": "CTC",
+          "arrival": "17:30",
+          "departure": null,
+          "platform": 4,
+          "day_offset": 0
+        }
+      ]
+    },
+    {
+      "id": "EXP-36",
+      "name": "Service EXP-36",
+      "type": "Express",
+      "days": [
+        "Daily"
+      ],
+      "stops": [
+        {
+          "station": "PNBE",
+          "arrival": null,
+          "departure": "07:30",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "DNR",
+          "arrival": "07:53",
+          "departure": "07:58",
+          "platform": 2,
+          "day_offset": 0
+        },
+        {
+          "station": "ARA",
+          "arrival": "08:43",
+          "departure": "08:48",
+          "platform": 3,
+          "day_offset": 0
+        },
+        {
+          "station": "BXR",
+          "arrival": "09:44",
+          "departure": "09:49",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "DDU",
+          "arrival": "11:06",
+          "departure": "11:11",
+          "platform": 5,
+          "day_offset": 0
+        },
+        {
+          "station": "MZP",
+          "arrival": "12:07",
+          "departure": "12:12",
+          "platform": 3,
+          "day_offset": 0
+        },
+        {
+          "station": "PRYJ",
+          "arrival": "13:17",
+          "departure": "13:22",
+          "platform": 7,
+          "day_offset": 0
+        },
+        {
+          "station": "CNB",
+          "arrival": "15:39",
+          "departure": "15:44",
+          "platform": 8,
+          "day_offset": 0
+        },
+        {
+          "station": "ETW",
+          "arrival": "17:25",
+          "departure": "17:30",
+          "platform": 4,
+          "day_offset": 0
+        },
+        {
+          "station": "TDL",
+          "arrival": "18:35",
+          "departure": "18:40",
+          "platform": 5,
+          "day_offset": 0
+        },
+        {
+          "station": "ALJN",
+          "arrival": "19:36",
+          "departure": "19:41",
+          "platform": 4,
+          "day_offset": 0
+        },
+        {
+          "station": "GZB",
+          "arrival": "21:31",
+          "departure": "21:36",
+          "platform": 6,
+          "day_offset": 0
+        },
+        {
+          "station": "NDLS",
+          "arrival": "22:38",
+          "departure": null,
+          "platform": 13,
+          "day_offset": 0
+        }
+      ]
+    },
+    {
+      "id": "SHAT-39",
+      "name": "Service SHAT-39",
+      "type": "Shatabdi",
+      "days": [
+        "Daily"
+      ],
+      "stops": [
+        {
+          "station": "LKO",
+          "arrival": null,
+          "departure": "08:00",
           "platform": 1,
           "day_offset": 0
         },
         {
           "station": "TDL",
-          "arrival": "08:47",
-          "departure": "09:02",
-          "platform": 1,
+          "arrival": "11:56",
+          "departure": "12:00",
+          "platform": 2,
           "day_offset": 0
         },
         {
-          "station": "ETW",
-          "arrival": "10:12",
-          "departure": "10:27",
-          "platform": 1,
+          "station": "ALJN",
+          "arrival": "12:54",
+          "departure": "12:56",
+          "platform": 3,
           "day_offset": 0
         },
         {
-          "station": "CNB",
-          "arrival": "12:17",
+          "station": "GZB",
+          "arrival": "14:46",
+          "departure": "14:48",
+          "platform": 4,
+          "day_offset": 0
+        },
+        {
+          "station": "NDLS",
+          "arrival": "15:50",
           "departure": null,
-          "platform": 1,
+          "platform": 5,
           "day_offset": 0
         }
       ]
@@ -511,54 +1176,47 @@
     "action_type": "generate_schedule",
     "conflict_flags": null,
     "schedule_proposal": {
-      "train_id": "PASS-01",
-      "train_type": "Passenger",
+      "train_id": "SHAT-39",
+      "train_type": "Shatabdi",
       "stops": [
         {
-          "station": "NDLS",
+          "station": "LKO",
           "arrival": null,
-          "departure": "04:50",
-          "platform": 1,
-          "day_offset": 0
-        },
-        {
-          "station": "GZB",
-          "arrival": "05:57",
-          "departure": "06:12",
-          "platform": 1,
-          "day_offset": 0
-        },
-        {
-          "station": "ALJN",
-          "arrival": "07:32",
-          "departure": "07:47",
+          "departure": "08:00",
           "platform": 1,
           "day_offset": 0
         },
         {
           "station": "TDL",
-          "arrival": "08:47",
-          "departure": "09:02",
-          "platform": 1,
+          "arrival": "11:56",
+          "departure": "12:00",
+          "platform": 2,
           "day_offset": 0
         },
         {
-          "station": "ETW",
-          "arrival": "10:12",
-          "departure": "10:27",
-          "platform": 1,
+          "station": "ALJN",
+          "arrival": "12:54",
+          "departure": "12:56",
+          "platform": 3,
           "day_offset": 0
         },
         {
-          "station": "CNB",
-          "arrival": "12:17",
+          "station": "GZB",
+          "arrival": "14:46",
+          "departure": "14:48",
+          "platform": 4,
+          "day_offset": 0
+        },
+        {
+          "station": "NDLS",
+          "arrival": "15:50",
           "departure": null,
-          "platform": 1,
+          "platform": 5,
           "day_offset": 0
         }
       ]
     },
-    "reasoning": "The train PASS-01 is the slowest train and sets the baseline congestion on the main line. It must depart from NDLS at 04:50 and be assigned to platform 1. The earliest arrival at GZB is calculated to be 05:57, with a departure at 06:12. Since all trains behind must respect a minimum headway of 20 minutes, we need to ensure that any subsequent trains departing NDLS do not conflict with this schedule. There are no trains currently on shared track segments, so there are no immediate conflicts. The weather conditions require compliance with fog speed regulations, which have been accounted for in the proposed schedule."
+    "reasoning": "Adjusted departure from TDL to avoid a rear-end conflict with EXP-36."
   },
   "last_reward": {
     "score": 1.0,
