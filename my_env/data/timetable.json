@@ -1,0 +1,56 @@
+{
+  "trains": [
+    {
+      "id": "PASS-01",
+      "name": "Service PASS-01",
+      "type": "Passenger",
+      "days": [
+        "Daily"
+      ],
+      "stops": [
+        {
+          "station": "NDLS",
+          "arrival": null,
+          "departure": "04:50",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "GZB",
+          "arrival": "05:57",
+          "departure": "06:12",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "ALJN",
+          "arrival": "07:32",
+          "departure": "07:47",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "TDL",
+          "arrival": "08:47",
+          "departure": "09:02",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "ETW",
+          "arrival": "10:12",
+          "departure": "10:27",
+          "platform": 1,
+          "day_offset": 0
+        },
+        {
+          "station": "CNB",
+          "arrival": "12:17",
+          "departure": null,
+          "platform": 1,
+          "day_offset": 0
+        }
+      ]
+    }
+  ]
+}

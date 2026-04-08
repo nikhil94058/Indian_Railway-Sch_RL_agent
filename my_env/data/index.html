@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Station-wise Timetable</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { margin-top: 40px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+    th { background-color: #f0f0f0; }
+  </style>
+</head>
+<body>
+
+  <h1>Station-wise Timetable</h1>
+  <div id="stations"></div>
+
+  <script>
+    fetch('timetable.json')
+      .then(res => res.json())
+      .then(data => {
+        const stationMap = {};
+
+        // Build station-wise mapping
+        data.trains.forEach(train => {
+          train.stops.forEach(stop => {
+            if (!stationMap[stop.station]) {
+              stationMap[stop.station] = [];
+            }
+            stationMap[stop.station].push({
+              trainName: train.name,
+              trainId: train.id,
+              arrival: stop.arrival ? stop.arrival : '-',
+              departure: stop.departure ? stop.departure : '-',
+              platform: stop.platform
+            });
+          });
+        });
+
+        const container = document.getElementById('stations');
+
+        // Create tables for each station
+        Object.keys(stationMap).forEach(station => {
+          const section = document.createElement('div');
+          section.innerHTML = `<h2>${station}</h2>`;
+          
+          const table = document.createElement('table');
+          table.innerHTML = `
+            <thead>
+              <tr>
+                <th>Train Name</th>
+                <th>Train ID</th>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Platform</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${stationMap[station].map(stop => `
+                <tr>
+                  <td>${stop.trainName}</td>
+                  <td>${stop.trainId}</td>
+                  <td>${stop.arrival}</td>
+                  <td>${stop.departure}</td>
+                  <td>${stop.platform}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          `;
+
+          section.appendChild(table);
+          container.appendChild(section);
+        });
+      })
+      .catch(err => console.error('Error loading JSON:', err));
+  </script>
+</body>
+</html>

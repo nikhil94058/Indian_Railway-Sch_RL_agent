@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>IR Dispatch · Live Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #020617; color: #f8fafc; font-family: ui-sans-serif, system-ui; overflow: hidden; }
+    #network { position: absolute; top: 72px; left: 0; right: 0; bottom: 0; }
+    .vis-network { outline: none !important; }
+
+    /* Pulse animation for LIVE badge */
+    @keyframes pulse-ring {
+      0%   { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+    .live-ring::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #22c55e; animation: pulse-ring 1.4s infinite;
+    }
+
+    /* Scrollbar for info panel */
+    .panel-scroll { scrollbar-width: thin; scrollbar-color: #334155 transparent; }
+    .panel-scroll::-webkit-scrollbar { width: 4px; }
+    .panel-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+
+    /* Score bar animation */
+    .score-bar-fill { transition: width 0.4s ease; }
+
+    /* Train tooltip */
+    #tooltip {
+      position: fixed; display: none; z-index: 9999;
+      background: #0f172a; border: 1px solid #334155; border-radius: 8px;
+      padding: 10px 14px; max-width: 280px; font-size: 11px; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ TOP BAR ═══════════════════════════ -->
+<div style="height:72px; position:fixed; top:0; left:0; right:0; z-index:100;"
+     class="bg-slate-900/95 backdrop-blur border-b border-slate-800 flex items-center px-4 gap-4">
+
+  <!-- Brand -->
+  <div class="flex items-center gap-2 shrink-0">
+    <span class="text-2xl">🚄</span>
+    <div>
+      <div class="text-white font-black text-sm tracking-wide">IR DISPATCH</div>
+      <div class="text-slate-500 text-[9px] font-bold uppercase tracking-widest">Live AI Dashboard</div>
+    </div>
+  </div>
+
+  <!-- Live status badge -->
+  <div id="liveBadge" class="relative flex items-center gap-2 bg-slate-800 border border-slate-700 rounded-full px-3 py-1 shrink-0">
+    <div class="relative w-2 h-2">
+      <div class="live-ring w-2 h-2 rounded-full bg-slate-500 relative" id="liveDot"></div>
+    </div>
+    <span class="text-[10px] font-bold uppercase tracking-widest" id="liveText">Connecting…</span>
+  </div>
+
+  <!-- Task info -->
+  <div class="bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1 shrink-0 hidden" id="taskBadge">
+    <div class="text-[9px] text-slate-500 font-bold uppercase">Active Task</div>
+    <div class="text-xs font-bold text-blue-300" id="taskName">—</div>
+  </div>
+
+  <!-- Step counter -->
+  <div class="bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1 shrink-0 hidden" id="stepBadge">
+    <div class="text-[9px] text-slate-500 font-bold uppercase">Step</div>
+    <div class="text-xs font-bold text-emerald-300" id="stepText">0 / —</div>
+  </div>
+
+  <!-- Spacer -->
+  <div class="flex-1"></div>
+
+  <!-- Timeline scrubber -->
+  <div class="flex items-center gap-3 shrink-0">
+    <button id="btnPlayPause" title="Play/Pause"
+      class="w-8 h-8 flex items-center justify-center bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 transition text-base">⏸</button>
+    <input type="range" id="timeScrubber" min="0" max="2880" value="355"
+      class="w-52 accent-blue-500 cursor-pointer">
+    <select id="speedSelect" class="bg-slate-800 text-[11px] px-2 py-1 rounded border border-slate-700 text-blue-300 outline-none">
+      <option value="1">1×</option>
+      <option value="10">10×</option>
+      <option value="60" selected>60×</option>
+      <option value="120">120×</option>
+      <option value="360">360×</option>
+    </select>
+  </div>
+
+  <!-- Clock -->
+  <div class="bg-black/60 px-4 py-1 rounded-xl border border-slate-800 text-center shrink-0">
+    <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest" id="dayDisplay">DAY 0</div>
+    <div class="text-xl font-mono font-bold text-white tracking-wider" id="clockDisplay">05:55</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ MAIN GRAPH ════════════════════════ -->
+<div id="network"></div>
+
+<!-- ═══════════════════════ SCORE PANEL (bottom-left) ════════════ -->
+<div id="scorePanel"
+     class="fixed bottom-4 left-4 z-50 w-72 bg-slate-900/95 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hidden">
+
+  <!-- Header -->
+  <div class="px-4 py-2 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Physics Score</span>
+    <span class="text-lg font-black" id="totalScore">—</span>
+  </div>
+
+  <!-- 6 component bars -->
+  <div class="px-4 py-3 space-y-2" id="scoreBars"></div>
+
+  <!-- Feedback -->
+  <div class="px-4 pb-3">
+    <div class="text-[9px] font-bold uppercase text-slate-500 mb-1">Last Feedback</div>
+    <div class="text-[10px] text-slate-300 leading-relaxed panel-scroll max-h-16 overflow-y-auto" id="feedbackText">—</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ REASONING PANEL (bottom-right) ════════ -->
+<div id="reasonPanel"
+     class="fixed bottom-4 right-4 z-50 w-80 bg-slate-900/95 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hidden">
+  <div class="px-4 py-2 bg-slate-800 border-b border-slate-700">
+    <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">AI Reasoning</span>
+  </div>
+  <div class="px-4 py-3 panel-scroll max-h-36 overflow-y-auto">
+    <div class="text-[10px] text-slate-300 leading-relaxed italic" id="reasonText">Waiting for agent action…</div>
+  </div>
+</div>
+
+<!-- ═════════════ TRAIN TOOLTIP ════════════════════════════════════ -->
+<div id="tooltip"></div>
+
+<!-- ═══════════════════════════ LEGEND ═══════════════════════════ -->
+<div class="fixed top-20 right-3 z-50 flex flex-col gap-1">
+  <div class="bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-[9px]">
+    <div class="font-black uppercase text-slate-500 mb-2 tracking-widest">Train Types</div>
+    <div id="legend" class="space-y-1"></div>
+  </div>
+  <div class="bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 text-[9px]">
+    <div class="font-black uppercase text-slate-500 mb-2 tracking-widest">Weather Zones</div>
+    <div id="weatherLegend" class="space-y-1"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════════════════════════════
+const DATA_URL    = '/my_env/data/simulation_state.json';
+const NETWORK_URL = '/my_env/data/network.json';
+const POLL_MS     = 2000;
+
+const TRAIN_COLORS = {
+  Rajdhani:  { bg: '#854d0e', border: '#fbbf24', text: '#fef3c7' },
+  Shatabdi:  { bg: '#164e63', border: '#22d3ee', text: '#cffafe' },
+  Duronto:   { bg: '#7c2d12', border: '#fb923c', text: '#fff7ed' },
+  superfast: { bg: '#1e3a5f', border: '#60a5fa', text: '#eff6ff' },
+  Express:   { bg: '#14532d', border: '#4ade80', text: '#f0fdf4' },
+  express:   { bg: '#14532d', border: '#4ade80', text: '#f0fdf4' },
+  Passenger: { bg: '#1e3a8a', border: '#93c5fd', text: '#eff6ff' },
+  passenger: { bg: '#1e3a8a', border: '#93c5fd', text: '#eff6ff' },
+  Freight:   { bg: '#3b0764', border: '#c084fc', text: '#faf5ff' },
+  freight:   { bg: '#3b0764', border: '#c084fc', text: '#faf5ff' },
+  Special:   { bg: '#713f12', border: '#fde68a', text: '#fefce8' },
+};
+const DEFAULT_COLOR = { bg: '#1e293b', border: '#64748b', text: '#f1f5f9' };
+
+const ZONE_COLORS = {
+  NR:   { border: '#3b82f6', label: 'Dense Fog',     icon: '🌫️' },
+  NCR:  { border: '#334155', label: 'Clear',          icon: '☀️' },
+  ECR:  { border: '#eab308', label: 'Heavy Rain',     icon: '🌧️' },
+  ER:   { border: '#334155', label: 'Clear',          icon: '☀️' },
+  NER:  { border: '#334155', label: 'Clear',          icon: '☀️' },
+  SER:  { border: '#ef4444', label: 'Cyclone Alert',  icon: '🌀' },
+  ECoR: { border: '#ef4444', label: 'Cyclone Alert',  icon: '🌀' },
+};
+
+const SCORE_COMPONENTS = [
+  { key: 'conflict_free',      label: 'Conflict Free',       color: '#22c55e', weight: '40%' },
+  { key: 'journey_time',       label: 'Journey Time',        color: '#3b82f6', weight: '20%' },
+  { key: 'platform_valid',     label: 'Platform Valid',      color: '#a855f7', weight: '15%' },
+  { key: 'headway_quality',    label: 'Headway Quality',     color: '#f59e0b', weight: '12%' },
+  { key: 'priority_respected', label: 'Priority Respected',  color: '#06b6d4', weight: '8%'  },
+  { key: 'dwell_valid',        label: 'Dwell Valid',         color: '#ec4899', weight: '5%'  },
+];
+
+// ═══════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════
+let stations = [], tracks = [], trains = [];
+let network, nodes, edges, trainIds = new Set();
+let currentMins = 355, isPlaying = true, speed = 60, lastTick = performance.now();
+let lastStateEtag = null;
+
+// ═══════════════════════════════════════════════════════════════════
+// LEGENDS
+// ═══════════════════════════════════════════════════════════════════
+function buildLegends() {
+  const leg = document.getElementById('legend');
+  const shown = ['Rajdhani','Shatabdi','Duronto','Express','Passenger','Freight'];
+  leg.innerHTML = shown.map(t => {
+    const c = TRAIN_COLORS[t] || DEFAULT_COLOR;
+    return `<div class="flex items-center gap-1.5">
+      <div class="w-3 h-2 rounded-sm" style="background:${c.border}"></div>
+      <span style="color:${c.text}">${t}</span>
+    </div>`;
+  }).join('');
+
+  const wleg = document.getElementById('weatherLegend');
+  const shown2 = ['NR','NCR','ECR','SER'];
+  wleg.innerHTML = shown2.map(z => {
+    const c = ZONE_COLORS[z];
+    return `<div class="flex items-center gap-1.5">
+      <div class="w-3 h-3 rounded-sm border-2" style="border-color:${c.border};background:#0f172a"></div>
+      <span class="text-slate-300">${z} ${c.icon} ${c.label}</span>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// GRAPH BUILD
+// ═══════════════════════════════════════════════════════════════════
+function buildGraph() {
+  nodes = new vis.DataSet();
+  edges = new vis.DataSet();
+  trainIds.clear();
+
+  stations.forEach(s => {
+    const pCount = parseInt(s.platform_count) || 5;
+    const zone = s.zone || 'NCR';
+    const zc = ZONE_COLORS[zone] || ZONE_COLORS['NCR'];
+    const W = 130, H = pCount * 16 + 28;
+
+    nodes.add({
+      id: s.id, label: s.id, shape: 'custom',
+      ctxRenderer: ({ ctx, x, y, state: { selected } }) => {
+        return {
+          drawNode() {
+            // Station box
+            ctx.fillStyle = '#0c1628';
+            ctx.strokeStyle = selected ? '#93c5fd' : zc.border;
+            ctx.lineWidth = selected ? 3 : 2;
+            ctx.beginPath();
+            ctx.roundRect(x - W/2, y - H/2, W, H, 6);
+            ctx.fill(); ctx.stroke();
+
+            // Weather zone accent bar (top)
+            ctx.fillStyle = zc.border;
+            ctx.globalAlpha = 0.3;
+            ctx.fillRect(x - W/2 + 2, y - H/2 + 2, W - 4, 4);
+            ctx.globalAlpha = 1;
+
+            // Station name
+            ctx.fillStyle = '#f1f5f9';
+            ctx.font = 'bold 11px ui-sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            ctx.fillText(s.name.length > 16 ? s.id : s.name, x, y - H/2 + 8);
+
+            // Platform tracks
+            for (let i = 0; i < pCount; i++) {
+              const ty2 = (y - H/2 + 26) + i * 16;
+              ctx.strokeStyle = '#1e3a5f';
+              ctx.lineWidth = 1.5;
+              ctx.beginPath();
+              ctx.moveTo(x - W/2 + 20, ty2);
+              ctx.lineTo(x + W/2 - 6, ty2);
+              ctx.stroke();
+              ctx.fillStyle = '#475569';
+              ctx.font = 'bold 8px monospace';
+              ctx.textAlign = 'left';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(`P${i+1}`, x - W/2 + 5, ty2);
+            }
+
+            // Zone icon (bottom-right)
+            ctx.font = '10px serif';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText(zc.icon, x + W/2 - 4, y + H/2 - 2);
+          },
+          nodeDimensions: { width: W, height: H }
+        };
+      }
+    });
+  });
+
+  tracks.forEach((t, i) => {
+    edges.add({ id: `e${i}`, from: t.from, to: t.to, color: 'transparent', selectionWidth: 0 });
+  });
+
+  const container = document.getElementById('network');
+  network = new vis.Network(container, { nodes, edges }, {
+    physics: {
+      enabled: true,
+      stabilization: { iterations: 200 },
+      barnesHut: { gravitationalConstant: -14000, springLength: 280, springConstant: 0.04, damping: 0.4 }
+    },
+    interaction: { hover: true, tooltipDelay: 200, zoomView: true, dragView: true }
+  });
+
+  // Draw parallel tracks manually
+  network.on('beforeDrawing', ctx => {
+    const pos = network.getPositions();
+    ctx.save();
+    tracks.forEach(t => {
+      const pA = pos[t.from], pB = pos[t.to];
+      if (!pA || !pB) return;
+      const dx = pB.x - pA.x, dy = pB.y - pA.y;
+      const angle = Math.atan2(dy, dx);
+      const len = Math.sqrt(dx*dx + dy*dy);
+      const count = t.track_count || 1;
+      const sp = 7;
+
+      ctx.save();
+      ctx.translate(pA.x, pA.y);
+      ctx.rotate(angle);
+      for (let j = 0; j < count; j++) {
+        const off = (j - (count-1)/2) * sp;
+        ctx.strokeStyle = '#1e3a5f';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(0, off); ctx.lineTo(len, off);
+        ctx.stroke();
+        // rail ties
+        for (let k = 20; k < len - 10; k += 24) {
+          ctx.strokeStyle = '#0f2540';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(k, off - 3); ctx.lineTo(k, off + 3);
+          ctx.stroke();
+        }
+      }
+      ctx.restore();
+
+      // Track count label
+      const mx = (pA.x + pB.x) / 2, my = (pA.y + pB.y) / 2;
+      ctx.fillStyle = '#334155';
+      ctx.font = 'bold 9px monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`${count}T`, mx, my);
+    });
+    ctx.restore();
+  });
+
+  network.on('stabilizationIterationsDone', () => {
+    network.setOptions({ physics: false });
+  });
+
+  // Tooltip on hover
+  network.on('hoverNode', params => {
+    const id = params.node;
+    if (id.startsWith('t_')) {
+      const trainId = id.slice(2);
+      const train = trains.find(t2 => t2.id === trainId);
+      if (train) showTrainTooltip(params.event, train);
+    }
+  });
+  network.on('blurNode', () => { document.getElementById('tooltip').style.display = 'none'; });
+}
+
+function showTrainTooltip(event, train) {
+  const tt = document.getElementById('tooltip');
+  const c = TRAIN_COLORS[train.type] || DEFAULT_COLOR;
+  const stopList = (train.stops || []).slice(0, 5).map(s =>
+    `<tr><td class="pr-2" style="color:${c.border}">${s.station}</td>
+     <td class="pr-2">${s.arrival || '—'}</td>
+     <td>${s.departure || '—'}</td>
+     <td>P${s.platform || '?'}</td></tr>`
+  ).join('');
+  tt.innerHTML = `
+    <div style="color:${c.border}" class="font-black text-sm mb-1">${train.id} · ${train.type}</div>
+    <table class="text-[10px] text-slate-300 w-full">
+      <thead><tr class="text-slate-500 text-[9px]"><th class="pr-2 text-left">STN</th><th class="pr-2 text-left">ARR</th><th class="text-left">DEP</th><th class="text-left">PLT</th></tr></thead>
+      <tbody>${stopList}</tbody>
+    </table>
+    ${train.stops.length > 5 ? `<div class="text-slate-500 text-[9px] mt-1">…${train.stops.length - 5} more stops</div>` : ''}
+  `;
+  tt.style.display = 'block';
+  tt.style.left = (event.clientX + 16) + 'px';
+  tt.style.top  = (event.clientY - 10) + 'px';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TRAIN ANIMATION
+// ═══════════════════════════════════════════════════════════════════
+function trainHash(id) {
+  return id.split('').reduce((h, c) => h + c.charCodeAt(0), 0);
+}
+
+function toMins(t, day = 0) {
+  if (!t) return null;
+  const [h, m] = t.split(':').map(Number);
+  return day * 1440 + h * 60 + m;
+}
+
+function updateTrains() {
+  if (!network || !nodes) return;
+  const pos = network.getPositions();
+  const seen = new Set();
+
+  trains.forEach(train => {
+    if (!train.stops || train.stops.length < 2) return;
+    const c = TRAIN_COLORS[train.type] || DEFAULT_COLOR;
+
+    const first = train.stops[0];
+    const last  = train.stops[train.stops.length - 1];
+    const tStart = toMins(first.departure, first.day_offset);
+    const tEnd   = toMins(last.arrival || last.departure, last.day_offset);
+
+    let tx = 0, ty = 0, inStation = false, curStop = null;
+
+    if (currentMins < tStart) { curStop = first; inStation = true; }
+    else if (currentMins > tEnd) { curStop = last; inStation = true; }
+    else {
+      for (let i = 0; i < train.stops.length; i++) {
+        const s = train.stops[i];
+        const arr = toMins(s.arrival || s.departure, s.day_offset);
+        const dep = toMins(s.departure || s.arrival, s.day_offset);
+        if (arr !== null && dep !== null && currentMins >= arr && currentMins <= dep) {
+          curStop = s; inStation = true; break;
+        }
+        if (i < train.stops.length - 1) {
+          const n = train.stops[i + 1];
+          const tDep  = toMins(s.departure || s.arrival, s.day_offset);
+          const tArr2 = toMins(n.arrival || n.departure, n.day_offset);
+          if (tDep !== null && tArr2 !== null && currentMins >= tDep && currentMins <= tArr2) {
+            const pct = (currentMins - tDep) / (tArr2 - tDep);
+            const pA = pos[s.station], pB = pos[n.station];
+            if (pA && pB) {
+              tx = pA.x + (pB.x - pA.x) * pct;
+              ty = pA.y + (pB.y - pA.y) * pct;
+
+              // Offset onto the correct parallel track
+              const tr = tracks.find(t2 =>
+                (t2.from === s.station && t2.to === n.station) ||
+                (t2.to === s.station && t2.from === n.station)
+              );
+              if (tr) {
+                const cnt = tr.track_count || 1;
+                const idx = trainHash(train.id) % cnt;
+                const off = (idx - (cnt - 1) / 2) * 7;
+                const pF = pos[tr.from], pT = pos[tr.to];
+                if (pF && pT) {
+                  const dx = pT.x - pF.x, dy2 = pT.y - pF.y;
+                  const len = Math.sqrt(dx*dx + dy2*dy2) || 1;
+                  tx += (-dy2 / len) * off;
+                  ty += (dx / len) * off;
+                }
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    if (inStation && curStop) {
+      const sPos = pos[curStop.station];
+      if (!sPos) return;
+      const sData = stations.find(s2 => s2.id === curStop.station);
+      const pCount = sData ? parseInt(sData.platform_count) : 5;
+      const H = pCount * 16 + 28;
+      const pNum = curStop.platform || 1;
+      tx = sPos.x + 6;
+      ty = (sPos.y - H/2 + 26) + (pNum - 1) * 16;
+    }
+
+    seen.add(train.id);
+    const nd = {
+      id: `t_${train.id}`, x: tx, y: ty,
+      label: `${train.id}\n${train.type.slice(0,3).toUpperCase()}`,
+      shape: 'box',
+      color: { background: c.bg, border: c.border, highlight: { background: c.bg, border: '#fff' } },
+      font: { color: c.text, size: 9, face: 'monospace', bold: true, multi: false },
+      borderWidth: 2, margin: 3, physics: false, zIndex: 1000, title: train.id
+    };
+    if (trainIds.has(train.id)) nodes.update(nd);
+    else { nodes.add(nd); trainIds.add(train.id); }
+  });
+
+  // Remove trains no longer in timetable
+  trainIds.forEach(id => {
+    if (!seen.has(id)) { nodes.remove(`t_${id}`); trainIds.delete(id); }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SCORE PANEL
+// ═══════════════════════════════════════════════════════════════════
+function updateScorePanel(reward) {
+  if (!reward) return;
+  const panel = document.getElementById('scorePanel');
+  panel.classList.remove('hidden');
+
+  const score = reward.score ?? 0;
+  const el = document.getElementById('totalScore');
+  el.textContent = (score * 100).toFixed(1) + '%';
+  el.style.color = score >= 0.8 ? '#4ade80' : score >= 0.5 ? '#fbbf24' : '#f87171';
+
+  const bars = document.getElementById('scoreBars');
+  const bd = reward.breakdown || {};
+  bars.innerHTML = SCORE_COMPONENTS.map(c => {
+    const v = bd[c.key] ?? 0;
+    const pct = (v * 100).toFixed(0);
+    return `<div>
+      <div class="flex justify-between mb-0.5">
+        <span class="text-[9px] text-slate-400">${c.label} <span class="text-slate-600">${c.weight}</span></span>
+        <span class="text-[9px] font-bold" style="color:${c.color}">${pct}%</span>
+      </div>
+      <div class="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+        <div class="h-full rounded-full score-bar-fill" style="width:${pct}%;background:${c.color}"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const fb = document.getElementById('feedbackText');
+  fb.textContent = reward.feedback || 'No feedback';
+  fb.style.color = reward.feedback === 'Perfect Schedule.' ? '#4ade80' : '#fca5a5';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// DATA POLLING
+// ═══════════════════════════════════════════════════════════════════
+let networkLoaded = false;
+
+async function loadNetwork() {
+  try {
+    const r = await fetch(NETWORK_URL + '?t=' + Date.now());
+    if (!r.ok) return;
+    const data = await r.json();
+    stations = data.stations || [];
+    tracks   = data.tracks   || [];
+    networkLoaded = true;
+    buildGraph();
+    buildLegends();
+  } catch(e) { /* will retry */ }
+}
+
+async function pollState() {
+  try {
+    const r = await fetch(DATA_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error('not found');
+
+    const state = await r.json();
+
+    // Live badge → connected
+    const dot  = document.getElementById('liveDot');
+    const text = document.getElementById('liveText');
+    dot.style.background  = '#22c55e';
+    dot.className = 'live-ring w-2 h-2 rounded-full relative';
+    text.textContent = 'LIVE';
+    text.style.color = '#4ade80';
+
+    // Update network if state contains it and we haven't loaded yet
+    if (!networkLoaded && state.network_summary) {
+      stations = state.network_summary.stations || [];
+      tracks   = state.network_summary.tracks   || [];
+      networkLoaded = true;
+      buildGraph();
+      buildLegends();
+    } else if (!networkLoaded) {
+      await loadNetwork();
+    }
+
+    // Update timetable
+    const newTrains = state.current_timetable || [];
+    if (JSON.stringify(newTrains.map(t => t.id)) !== JSON.stringify(trains.map(t => t.id))) {
+      trains = newTrains;
+    } else {
+      trains = newTrains; // always refresh stop data
+    }
+
+    // Task + step badges
+    if (state.task_id) {
+      document.getElementById('taskBadge').classList.remove('hidden');
+      document.getElementById('taskName').textContent = `Task ${state.task_id}`;
+    }
+    if (state.step_count !== undefined) {
+      document.getElementById('stepBadge').classList.remove('hidden');
+      document.getElementById('stepText').textContent =
+        `${state.step_count} / ${state.last_reward?.done ? 'DONE' : '…'}`;
+    }
+
+    // Score panel
+    if (state.last_reward) updateScorePanel(state.last_reward);
+
+    // Reasoning panel
+    if (state.last_action?.reasoning) {
+      document.getElementById('reasonPanel').classList.remove('hidden');
+      document.getElementById('reasonText').textContent = state.last_action.reasoning;
+    }
+
+  } catch (e) {
+    // Not connected / file not found
+    const dot  = document.getElementById('liveDot');
+    const text = document.getElementById('liveText');
+    dot.style.background = '#ef4444';
+    dot.className = 'w-2 h-2 rounded-full';
+    text.textContent = 'OFFLINE';
+    text.style.color = '#f87171';
+
+    // Load network from static file as fallback
+    if (!networkLoaded) await loadNetwork();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// CONTROLS
+// ═══════════════════════════════════════════════════════════════════
+document.getElementById('btnPlayPause').onclick = () => {
+  isPlaying = !isPlaying;
+  document.getElementById('btnPlayPause').textContent = isPlaying ? '⏸' : '▶';
+};
+document.getElementById('speedSelect').onchange = e => speed = Number(e.target.value);
+document.getElementById('timeScrubber').oninput = e => {
+  currentMins = Number(e.target.value);
+  updateClockDisplay();
+  updateTrains();
+};
+
+function updateClockDisplay() {
+  const m = Math.floor(currentMins);
+  const day = Math.floor(m / 1440);
+  const hh  = Math.floor((m % 1440) / 60);
+  const mm  = m % 60;
+  document.getElementById('dayDisplay').textContent  = `DAY ${day}`;
+  document.getElementById('clockDisplay').textContent =
+    `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+  document.getElementById('timeScrubber').value = m;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// ANIMATION LOOP
+// ═══════════════════════════════════════════════════════════════════
+function animate() {
+  requestAnimationFrame(animate);
+  const now = performance.now();
+  if (isPlaying) {
+    currentMins += ((now - lastTick) / 1000) * speed;
+    if (currentMins > 2880) currentMins = 0; // 2-day wrap
+    updateClockDisplay();
+    updateTrains();
+  }
+  lastTick = now;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════
+(async () => {
+  // Try loading simulation state first (has network embedded)
+  await pollState();
+
+  // If still no network (server not running), fall back to static network.json
+  if (!networkLoaded) {
+    await loadNetwork();
+  }
+
+  // Start animation
+  animate();
+
+  // Poll live state every 2s
+  setInterval(pollState, POLL_MS);
+})();
+</script>
+</body>
+</html>

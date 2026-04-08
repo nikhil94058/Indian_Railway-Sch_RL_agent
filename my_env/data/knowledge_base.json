@@ -1,0 +1,786 @@
+{
+  "failures": [
+    {
+      "train_id": "FR-13",
+      "error": "SPEED VIOLATION: ASN\u2192HWH: proposed 120min but physics+weather minimum is 200min for Freight (zone: ER, weather: Clear). | SPEED WARNING: HWH\u2192SRC: proposed 30min is tight (minimum 36min under current w",
+      "track": "ASN-HWH"
+    },
+    {
+      "train_id": "FR-13",
+      "error": "DWELL TOO SHORT: HWH dwell=1min (min=15min for Freight). | DWELL TOO SHORT: SRC dwell=1min (min=15min for Freight). | DWELL TOO SHORT: KGP dwell=1min (min=15min for Freight). | DWELL TOO SHORT: BLS dw",
+      "track": "ASN-HWH"
+    },
+    {
+      "train_id": "FR-13",
+      "error": "LOCO FAILURE: Preceding train stalled \u2014 expect 19min clearance delay. | SPEED WARNING: ASN\u2192HWH: proposed 160min is tight (minimum 200min under current weather). | SPEED VIOLATION: HWH\u2192SRC: proposed 20",
+      "track": "ASN-HWH"
+    },
+    {
+      "train_id": "FR-13",
+      "error": "DWELL TOO SHORT: HWH dwell=1min (min=15min for Freight). | DWELL TOO SHORT: SRC dwell=1min (min=15min for Freight). | DWELL TOO SHORT: KGP dwell=1min (min=15min for Freight). | DWELL TOO SHORT: BLS dw",
+      "track": "ASN-HWH"
+    },
+    {
+      "train_id": "FR-13",
+      "error": "SPEED VIOLATION: ASN\u2192HWH: proposed 60min but physics+weather minimum is 200min for Freight (zone: ER, weather: Clear). | SPEED VIOLATION: HWH\u2192SRC: proposed 26min but physics+weather minimum is 36min f",
+      "track": "ASN-HWH"
+    },
+    {
+      "train_id": "FR-13",
+      "error": "DWELL TOO SHORT: HWH dwell=1min (min=15min for Freight). | DWELL TOO SHORT: SRC dwell=1min (min=15min for Freight). | DWELL TOO SHORT: KGP dwell=1min (min=15min for Freight). | DWELL TOO SHORT: BLS dw",
+      "track": "ASN-HWH"
+    },
+    {
+      "train_id": "FR-13",
+      "error": "SPEED VIOLATION: ASN\u2192HWH: proposed 120min but physics+weather minimum is 200min for Freight (zone: ER, weather: Clear). | SPEED WARNING: HWH\u2192SRC: proposed 30min is tight (minimum 36min under current w",
+      "track": "ASN-HWH"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "SPEED VIOLATION: SRC\u2192KGP: proposed 60min but physics+weather minimum is 162min for Passenger (zone: SER, weather: Cyclone Alert). | REAR-END RISK: SRC\u2192KGP: only 4min gap from DUR-14 (Duronto). Require",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "REAR-END RISK: SRC\u2192KGP: only 4min gap from DUR-14 (Duronto). Required headway: 20min (max of 20min/10min).",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "SPEED VIOLATION: SRC\u2192KGP: proposed 60min but physics+weather minimum is 162min for Passenger (zone: SER, weather: Cyclone Alert). | REAR-END RISK: SRC\u2192KGP: only 10min gap from EXP-12 (Express). Requir",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "REAR-END RISK: SRC\u2192KGP: only 10min gap from EXP-12 (Express). Required headway: 20min (max of 20min/15min). | PRIORITY VIOLATION: DUR-14 (Duronto, priority=3) blocked by Passenger (priority=6) on SRC\u2192",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "REAR-END RISK: SRC\u2192KGP: only 16min gap from DUR-14 (Duronto). Required headway: 20min (max of 20min/10min). | PRIORITY VIOLATION: DUR-14 (Duronto, priority=3) blocked by Passenger (priority=6) on SRC\u2192",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "REAR-END RISK: SRC\u2192KGP: only 10min gap from EXP-12 (Express). Required headway: 20min (max of 20min/15min). | PRIORITY VIOLATION: DUR-14 (Duronto, priority=3) blocked by Passenger (priority=6) on SRC\u2192",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "SPEED VIOLATION: SRC\u2192KGP: proposed 20min but physics+weather minimum is 162min for Passenger (zone: SER, weather: Cyclone Alert).",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "SPEED WARNING: SRC\u2192KGP: proposed 132min is tight (minimum 162min under current weather). | REAR-END RISK: SRC\u2192KGP: only 4min gap from DUR-14 (Duronto). Required headway: 20min (max of 20min/10min).",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "REAR-END RISK: SRC\u2192KGP: only 4min gap from DUR-14 (Duronto). Required headway: 20min (max of 20min/10min).",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "PASS-15",
+      "error": "REAR-END RISK: SRC\u2192KGP: only 10min gap from EXP-12 (Express). Required headway: 20min (max of 20min/15min). | PRIORITY VIOLATION: DUR-14 (Duronto, priority=3) blocked by Passenger (priority=6) on SRC\u2192",
+      "track": "SRC-KGP"
+    },
+    {
+      "train_id": "EXP-36",
+      "error": "DWELL TOO SHORT: BXR dwell=1min (min=5min for Express). | DWELL TOO SHORT: MZP dwell=1min (min=5min for Express). | TRACK FULL: BXR\u2194DDU (2 tracks) \u2014 all lines occupied by opposing trains.",
+      "track": "PNBE-DNR"
+    },
+    {
+      "train_id": "EXP-36",
+      "error": "PLATFORM CLASH: NDLS Plat-2 occupied by DUR-33 at the same time. | TRACK FULL: BXR\u2194DDU (2 tracks) \u2014 all lines occupied by opposing trains. | SPEED VIOLATION: PRYJ\u2192CNB: proposed 100min but physics+weat",
+      "track": "PNBE-DNR"
+    },
+    {
+      "train_id": "EXP-36",
+      "error": "DWELL TOO SHORT: BXR dwell=1min (min=5min for Express). | DWELL TOO SHORT: MZP dwell=1min (min=5min for Express). | TRACK FULL: BXR\u2194DDU (2 tracks) \u2014 all lines occupied by opposing trains.",
+      "track": "PNBE-DNR"
+    }
+  ],
+  "successes": [
+    {
+      "train_id": "PASS-01",
+      "train_type": "Passenger",
+      "route": [
+        "NDLS",
+        "GZB"
+      ],
+      "platforms": {
+        "NDLS": 1,
+        "GZB": 3
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "EXP-04",
+      "train_type": "Express",
+      "route": [
+        "NDLS",
+        "GZB"
+      ],
+      "platforms": {
+        "NDLS": 2,
+        "GZB": 3
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "RAJ-05",
+      "train_type": "Rajdhani",
+      "route": [
+        "NDLS",
+        "GZB"
+      ],
+      "platforms": {
+        "NDLS": 2,
+        "GZB": 3
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "SHAT-39",
+      "train_type": "Shatabdi",
+      "route": [
+        "LKO",
+        "TDL",
+        "ALJN",
+        "GZB",
+        "NDLS"
+      ],
+      "platforms": {
+        "LKO": 1,
+        "TDL": 2,
+        "ALJN": 3,
+        "GZB": 4,
+        "NDLS": 2
+      },
+      "score": 0.95
+    },
+    {
+      "train_id": "PASS-01",
+      "train_type": "Passenger",
+      "route": [
+        "NDLS",
+        "GZB",
+        "ALJN",
+        "TDL",
+        "ETW",
+        "CNB"
+      ],
+      "platforms": {
+        "NDLS": 1,
+        "GZB": 1,
+        "ALJN": 1,
+        "TDL": 1,
+        "ETW": 1,
+        "CNB": 1
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "EXP-04",
+      "train_type": "Express",
+      "route": [
+        "NDLS",
+        "GZB"
+      ],
+      "platforms": {
+        "NDLS": 2,
+        "GZB": 3
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "PASS-01",
+      "train_type": "Passenger",
+      "route": [
+        "NDLS",
+        "GZB",
+        "ALJN",
+        "TDL",
+        "ETW",
+        "CNB"
+      ],
+      "platforms": {
+        "NDLS": 1,
+        "GZB": 1,
+        "ALJN": 1,
+        "TDL": 1,
+        "ETW": 1,
+        "CNB": 1
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "EXP-04",
+      "train_type": "Express",
+      "route": [
+        "NDLS",
+        "GZB"
+      ],
+      "platforms": {
+        "NDLS": 2,
+        "GZB": 3
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "FR-24",
+      "train_type": "Freight",
+      "route": [
+        "DDU",
+        "BXR",
+        "ARA",
+        "DNR",
+        "PNBE",
+        "BKP",
+        "MKA",
+        "KIUL",
+        "JAJ",
+        "JSME",
+        "ASN"
+      ],
+      "platforms": {
+        "DDU": 1,
+        "BXR": 1,
+        "ARA": 1,
+        "DNR": 1,
+        "PNBE": 1,
+        "BKP": 1,
+        "MKA": 1,
+        "KIUL": 1,
+        "JAJ": 1,
+        "JSME": 1,
+        "ASN": 1
+      },
+      "score": 0.944
+    },
+    {
+      "train_id": "EXP-19",
+      "train_type": "Express",
+      "route": [
+        "CNB",
+        "DDU",
+        "BXR",
+        "ARA",
+        "DNR",
+        "PNBE"
+      ],
+      "platforms": {
+        "CNB": 1,
+        "DDU": 2,
+        "BXR": 3,
+        "ARA": 4,
+        "DNR": 5,
+        "PNBE": 6
+      },
+      "score": 0.988
+    },
+    {
+      "train_id": "EXP-20",
+      "train_type": "Express",
+      "route": [
+        "PNBE",
+        "DNR",
+        "ARA",
+        "BXR",
+        "DDU",
+        "MZP",
+        "PRYJ",
+        "CNB"
+      ],
+      "platforms": {
+        "PNBE": 1,
+        "DNR": 1,
+        "ARA": 3,
+        "BXR": 2,
+        "DDU": 4,
+        "MZP": 3,
+        "PRYJ": 10,
+        "CNB": 6
+      },
+      "score": 0.982
+    },
+    {
+      "train_id": "PASS-21",
+      "train_type": "Passenger",
+      "route": [
+        "ARA",
+        "BXR",
+        "DDU"
+      ],
+      "platforms": {
+        "ARA": 3,
+        "BXR": 1,
+        "DDU": 2
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "RAJ-31",
+      "train_type": "Rajdhani",
+      "route": [
+        "NDLS",
+        "GZB",
+        "ALJN",
+        "TDL",
+        "ETW",
+        "CNB",
+        "PRYJ",
+        "MZP",
+        "DDU",
+        "BXR",
+        "ARA",
+        "DNR",
+        "PNBE",
+        "BKP",
+        "MKA",
+        "KIUL",
+        "JAJ",
+        "JSME",
+        "ASN",
+        "HWH",
+        "SRC",
+        "KGP",
+        "BLS",
+        "BHC",
+        "CTC",
+        "BBS"
+      ],
+      "platforms": {
+        "NDLS": 2,
+        "GZB": 3,
+        "ALJN": 4,
+        "TDL": 3,
+        "ETW": 2,
+        "CNB": 5,
+        "PRYJ": 6,
+        "MZP": 2,
+        "DDU": 3,
+        "BXR": 2,
+        "ARA": 3,
+        "DNR": 4,
+        "PNBE": 5,
+        "BKP": 2,
+        "MKA": 3,
+        "KIUL": 4,
+        "JAJ": 2,
+        "JSME": 3,
+        "ASN": 4,
+        "HWH": 5,
+        "SRC": 6,
+        "KGP": 7,
+        "BLS": 3,
+        "BHC": 4,
+        "CTC": 5,
+        "BBS": 6
+      },
+      "score": 0.8
+    },
+    {
+      "train_id": "DUR-33",
+      "train_type": "Duronto",
+      "route": [
+        "NDLS",
+        "GZB",
+        "ALJN",
+        "TDL",
+        "ETW",
+        "CNB",
+        "PRYJ",
+        "MZP",
+        "DDU",
+        "BXR",
+        "ARA",
+        "DNR",
+        "PNBE",
+        "BKP",
+        "MKA",
+        "KIUL",
+        "JAJ",
+        "JSME",
+        "ASN",
+        "HWH"
+      ],
+      "platforms": {
+        "NDLS": 2,
+        "GZB": 3,
+        "ALJN": 4,
+        "TDL": 3,
+        "ETW": 2,
+        "CNB": 5,
+        "PRYJ": 6,
+        "MZP": 2,
+        "DDU": 3,
+        "BXR": 2,
+        "ARA": 3,
+        "DNR": 4,
+        "PNBE": 5,
+        "BKP": 2,
+        "MKA": 3,
+        "KIUL": 4,
+        "JAJ": 2,
+        "JSME": 3,
+        "ASN": 4,
+        "HWH": 5
+      },
+      "score": 0.95
+    },
+    {
+      "train_id": "EXP-12",
+      "train_type": "Express",
+      "route": [
+        "HWH",
+        "SRC",
+        "KGP",
+        "BLS",
+        "BHC",
+        "CTC",
+        "BBS",
+        "KUR",
+        "BAM",
+        "VSKP"
+      ],
+      "platforms": {
+        "HWH": 1,
+        "SRC": 1,
+        "KGP": 8,
+        "BLS": 2,
+        "BHC": 3,
+        "CTC": 4,
+        "BBS": 5,
+        "KUR": 6,
+        "BAM": 1,
+        "VSKP": 2
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "DUR-14",
+      "train_type": "Duronto",
+      "route": [
+        "HWH",
+        "SRC",
+        "KGP",
+        "BLS",
+        "BHC",
+        "CTC",
+        "BBS"
+      ],
+      "platforms": {
+        "HWH": 1,
+        "SRC": 1,
+        "KGP": 9,
+        "BLS": 3,
+        "BHC": 4,
+        "CTC": 5,
+        "BBS": 6
+      },
+      "score": 0.95
+    },
+    {
+      "train_id": "EXP-16",
+      "train_type": "Express",
+      "route": [
+        "KGP",
+        "BLS",
+        "BHC",
+        "CTC"
+      ],
+      "platforms": {
+        "KGP": 10,
+        "BLS": 2,
+        "BHC": 3,
+        "CTC": 4
+      },
+      "score": 1.0
+    },
+    {
+      "train_id": "EXP-36",
+      "train_type": "Express",
+      "route": [
+        "PNBE",
+        "DNR",
+        "ARA",
+        "BXR",
+        "DDU",
+        "MZP",
+        "PRYJ",
+        "CNB",
+        "ETW",
+        "TDL",
+        "ALJN",
+        "GZB",
+        "NDLS"
+      ],
+      "platforms": {
+        "PNBE": 1,
+        "DNR": 1,
+        "ARA": 1,
+        "BXR": 1,
+        "DDU": 1,
+        "MZP": 1,
+        "PRYJ": 1,
+        "CNB": 1,
+        "ETW": 1,
+        "TDL": 1,
+        "ALJN": 1,
+        "GZB": 1,
+        "NDLS": 2
+      },
+      "score": 0.6
+    },
+    {
+      "train_id": "SHAT-39",
+      "train_type": "Shatabdi",
+      "route": [
+        "LKO",
+        "TDL",
+        "GZB",
+        "NDLS"
+      ],
+      "platforms": {
+        "LKO": 1,
+        "TDL": 3,
+        "GZB": 3,
+        "NDLS": 2
+      },
+      "score": 0.975
+    },
+    {
+      "train_id": "PASS-01",
+      "train_type": "Passenger",
+      "route": [
+        "NDLS",
+        "GZB",
+        "ALJN",
+        "TDL",
+        "ETW",
+        "CNB"
+      ],
+      "platforms": {
+        "NDLS": 1,
+        "GZB": 1,
+        "ALJN": 1,
+        "TDL": 1,
+        "ETW": 1,
+        "CNB": 1
+      },
+      "score": 1.0
+    }
+  ],
+  "patterns": {
+    "congestion_windows": {
+      "DDU-BXR": [],
+      "HWH-SRC": [],
+      "SRC-KGP": [],
+      "PNBE-DNR": []
+    },
+    "platform_preferences": {
+      "NDLS": {
+        "Passenger": 1,
+        "Express": 2,
+        "Rajdhani": 2,
+        "Shatabdi": 2,
+        "Duronto": 2
+      },
+      "GZB": {
+        "Passenger": 1,
+        "Express": 1,
+        "Rajdhani": 3,
+        "Shatabdi": 3,
+        "Duronto": 3
+      },
+      "LKO": {
+        "Shatabdi": 1
+      },
+      "TDL": {
+        "Shatabdi": 3,
+        "Passenger": 1,
+        "Rajdhani": 3,
+        "Duronto": 3,
+        "Express": 1
+      },
+      "ALJN": {
+        "Shatabdi": 3,
+        "Passenger": 1,
+        "Rajdhani": 4,
+        "Duronto": 4,
+        "Express": 1
+      },
+      "ETW": {
+        "Passenger": 1,
+        "Rajdhani": 2,
+        "Duronto": 2,
+        "Express": 1
+      },
+      "CNB": {
+        "Passenger": 1,
+        "Express": 1,
+        "Rajdhani": 5,
+        "Duronto": 5
+      },
+      "DDU": {
+        "Freight": 1,
+        "Express": 1,
+        "Passenger": 2,
+        "Rajdhani": 3,
+        "Duronto": 3
+      },
+      "BXR": {
+        "Freight": 1,
+        "Express": 1,
+        "Passenger": 1,
+        "Rajdhani": 2,
+        "Duronto": 2
+      },
+      "ARA": {
+        "Freight": 1,
+        "Express": 1,
+        "Passenger": 3,
+        "Rajdhani": 3,
+        "Duronto": 3
+      },
+      "DNR": {
+        "Freight": 1,
+        "Express": 1,
+        "Rajdhani": 4,
+        "Duronto": 4
+      },
+      "PNBE": {
+        "Freight": 1,
+        "Express": 1,
+        "Rajdhani": 5,
+        "Duronto": 5
+      },
+      "BKP": {
+        "Freight": 1,
+        "Rajdhani": 2,
+        "Duronto": 2
+      },
+      "MKA": {
+        "Freight": 1,
+        "Rajdhani": 3,
+        "Duronto": 3
+      },
+      "KIUL": {
+        "Freight": 1,
+        "Rajdhani": 4,
+        "Duronto": 4
+      },
+      "JAJ": {
+        "Freight": 1,
+        "Rajdhani": 2,
+        "Duronto": 2
+      },
+      "JSME": {
+        "Freight": 1,
+        "Rajdhani": 3,
+        "Duronto": 3
+      },
+      "ASN": {
+        "Freight": 1,
+        "Rajdhani": 4,
+        "Duronto": 4
+      },
+      "MZP": {
+        "Express": 1,
+        "Rajdhani": 2,
+        "Duronto": 2
+      },
+      "PRYJ": {
+        "Express": 1,
+        "Rajdhani": 6,
+        "Duronto": 6
+      },
+      "HWH": {
+        "Rajdhani": 5,
+        "Duronto": 1,
+        "Express": 1
+      },
+      "SRC": {
+        "Rajdhani": 6,
+        "Express": 1,
+        "Duronto": 1
+      },
+      "KGP": {
+        "Rajdhani": 7,
+        "Express": 10,
+        "Duronto": 9
+      },
+      "BLS": {
+        "Rajdhani": 3,
+        "Express": 2,
+        "Duronto": 3
+      },
+      "BHC": {
+        "Rajdhani": 4,
+        "Express": 3,
+        "Duronto": 4
+      },
+      "CTC": {
+        "Rajdhani": 5,
+        "Express": 4,
+        "Duronto": 5
+      },
+      "BBS": {
+        "Rajdhani": 6,
+        "Express": 5,
+        "Duronto": 6
+      },
+      "KUR": {
+        "Express": 6
+      },
+      "BAM": {
+        "Express": 1
+      },
+      "VSKP": {
+        "Express": 2
+      }
+    },
+    "collision_hotspots": [
+      {
+        "segment": "NDLS-GZB",
+        "count": 16
+      },
+      {
+        "segment": "DDU-BXR",
+        "count": 12
+      },
+      {
+        "segment": "ASN-HWH",
+        "count": 10
+      },
+      {
+        "segment": "SRC-KGP",
+        "count": 10
+      },
+      {
+        "segment": "HWH-SRC",
+        "count": 6
+      },
+      {
+        "segment": "PNBE-DNR",
+        "count": 3
+      }
+    ]
+  },
+  "task_scores": {
+    "default": [
+      2.462,
+      2.462,
+      2.462,
+      2.462,
+      2.97,
+      2.97,
+      2.97,
+      2.97,
+      3.442,
+      3.948
+    ]
+  }
+}

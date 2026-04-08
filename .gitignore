@@ -1,0 +1,75 @@
+Environments and Secrets (CRITICAL)
+
+.env
+.env.*
+!.env.example
+secrets.json
+
+Byte-compiled / optimized / DLL files
+
+pycache/
+*.py[cod]
+*$py.class
+*.pyd
+*.so
+
+C extensions
+
+*.so
+
+Distribution / packaging
+
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+Virtual Environments
+
+venv/
+.venv/
+env/
+.env_venv/
+ENV/
+env.bak/
+venv.bak/
+
+OpenEnv specific outputs (Logs and evals)
+
+outputs/
+logs/
+evals/
+
+IDE / Editor folders
+
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+Pytest and coverage
+
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+Hugging Face specific (if you test gradio cache locally)
+
+flagged/

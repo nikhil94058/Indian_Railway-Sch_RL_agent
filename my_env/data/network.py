@@ -1,0 +1,80 @@
+data =  {
+  "stations": [
+    { "id": "NDLS", "name": "New Delhi", "zone": "NR", "platform_count": 16, "is_junction": True },
+    { "id": "GZB",  "name": "Ghaziabad", "zone": "NR", "platform_count": 6, "is_junction": True },
+    { "id": "ALJN", "name": "Aligarh", "zone": "NCR", "platform_count": 7, "is_junction": False },
+    { "id": "TDL",  "name": "Tundla", "zone": "NCR", "platform_count": 5, "is_junction": True },
+    { "id": "ETW",  "name": "Etawah", "zone": "NCR", "platform_count": 5, "is_junction": False },
+    { "id": "CNB",  "name": "Kanpur Central", "zone": "NCR", "platform_count": 10, "is_junction": True },
+    { "id": "PRYJ", "name": "Prayagraj", "zone": "NCR", "platform_count": 10, "is_junction": True },
+    { "id": "MZP",  "name": "Mirzapur", "zone": "NCR", "platform_count": 3, "is_junction": False },
+    { "id": "DDU",  "name": "Pt. Deen Dayal Upadhyaya", "zone": "ECR", "platform_count": 8, "is_junction": True },
+    { "id": "BXR",  "name": "Buxar", "zone": "ECR", "platform_count": 3, "is_junction": False },
+    { "id": "ARA",  "name": "Ara Junction", "zone": "ECR", "platform_count": 4, "is_junction": True },
+    { "id": "DNR",  "name": "Danapur", "zone": "ECR", "platform_count": 6, "is_junction": False },
+    { "id": "PNBE", "name": "Patna Junction", "zone": "ECR", "platform_count": 10, "is_junction": True },
+    { "id": "BKP",  "name": "Bakhtiyarpur", "zone": "ECR", "platform_count": 3, "is_junction": True },
+    { "id": "MKA",  "name": "Mokama", "zone": "ECR", "platform_count": 4, "is_junction": True },
+    { "id": "KIUL", "name": "Kiul Junction", "zone": "ECR", "platform_count": 5, "is_junction": True },
+    { "id": "JAJ",  "name": "Jhajha", "zone": "ECR", "platform_count": 4, "is_junction": False },
+    { "id": "JSME", "name": "Jasidih", "zone": "ER", "platform_count": 5, "is_junction": True },
+    { "id": "ASN",  "name": "Asansol", "zone": "ER", "platform_count": 7, "is_junction": True },
+    { "id": "HWH",  "name": "Howrah", "zone": "ER", "platform_count": 23, "is_junction": True },
+
+    { "id": "SRC",  "name": "Santragachi", "zone": "SER", "platform_count": 4, "is_junction": True },
+    { "id": "KGP",  "name": "Kharagpur", "zone": "SER", "platform_count": 12, "is_junction": True },
+    { "id": "BLS",  "name": "Balasore", "zone": "SER", "platform_count": 4, "is_junction": False },
+    { "id": "BHC",  "name": "Bhadrak", "zone": "ECoR", "platform_count": 4, "is_junction": True },
+    { "id": "CTC",  "name": "Cuttack", "zone": "ECoR", "platform_count": 5, "is_junction": False },
+    { "id": "BBS",  "name": "Bhubaneswar", "zone": "ECoR", "platform_count": 6, "is_junction": True },
+    { "id": "KUR",  "name": "Khurda Road", "zone": "ECoR", "platform_count": 7, "is_junction": True },
+    { "id": "BAM",  "name": "Brahmapur", "zone": "ECoR", "platform_count": 4, "is_junction": False },
+    { "id": "VSKP", "name": "Visakhapatnam", "zone": "ECoR", "platform_count": 8, "is_junction": True },
+
+    { "id": "FZR",  "name": "Firozpur", "zone": "NR", "platform_count": 4, "is_junction": True },
+    { "id": "LKO",  "name": "Lucknow", "zone": "NR", "platform_count": 9, "is_junction": True },
+    { "id": "BSB",  "name": "Varanasi", "zone": "NER", "platform_count": 8, "is_junction": True }
+  ],
+
+  "tracks": [
+    { "from": "NDLS", "to": "GZB", "distance_km": 26, "travel_minutes": 45, "track_count": 4 },
+    { "from": "GZB", "to": "ALJN", "distance_km": 105, "travel_minutes": 80, "track_count": 2 },
+    { "from": "ALJN", "to": "TDL", "distance_km": 78, "travel_minutes": 60, "track_count": 2 },
+    { "from": "TDL", "to": "ETW", "distance_km": 92, "travel_minutes": 70, "track_count": 2 },
+    { "from": "ETW", "to": "CNB", "distance_km": 139, "travel_minutes": 110, "track_count": 2 },
+    { "from": "CNB", "to": "PRYJ", "distance_km": 194, "travel_minutes": 150, "track_count": 2 },
+    { "from": "PRYJ", "to": "MZP", "distance_km": 89, "travel_minutes": 70, "track_count": 2 },
+    { "from": "MZP", "to": "DDU", "distance_km": 63, "travel_minutes": 60, "track_count": 2 },
+    { "from": "DDU", "to": "BXR", "distance_km": 94, "travel_minutes": 70, "track_count": 2 },
+    { "from": "BXR", "to": "ARA", "distance_km": 68, "travel_minutes": 50, "track_count": 2 },
+    { "from": "ARA", "to": "DNR", "distance_km": 39, "travel_minutes": 40, "track_count": 2 },
+    { "from": "DNR", "to": "PNBE", "distance_km": 10, "travel_minutes": 20, "track_count": 2 },
+    { "from": "PNBE", "to": "BKP", "distance_km": 45, "travel_minutes": 50, "track_count": 2 },
+    { "from": "BKP", "to": "MKA", "distance_km": 44, "travel_minutes": 45, "track_count": 2 },
+    { "from": "MKA", "to": "KIUL", "distance_km": 34, "travel_minutes": 40, "track_count": 2 },
+    { "from": "KIUL", "to": "JAJ", "distance_km": 54, "travel_minutes": 60, "track_count": 2 },
+    { "from": "JAJ", "to": "JSME", "distance_km": 44, "travel_minutes": 45, "track_count": 2 },
+    { "from": "JSME", "to": "ASN", "distance_km": 111, "travel_minutes": 100, "track_count": 2 },
+    { "from": "ASN", "to": "HWH", "distance_km": 200, "travel_minutes": 180, "track_count": 3 },
+
+    { "from": "HWH", "to": "SRC", "distance_km": 10, "travel_minutes": 20, "track_count": 3 },
+    { "from": "SRC", "to": "KGP", "distance_km": 107, "travel_minutes": 90, "track_count": 3 },
+    { "from": "KGP", "to": "BLS", "distance_km": 116, "travel_minutes": 95, "track_count": 2 },
+    { "from": "BLS", "to": "BHC", "distance_km": 65, "travel_minutes": 60, "track_count": 2 },
+    { "from": "BHC", "to": "CTC", "distance_km": 115, "travel_minutes": 100, "track_count": 2 },
+    { "from": "CTC", "to": "BBS", "distance_km": 30, "travel_minutes": 30, "track_count": 2 },
+    { "from": "BBS", "to": "KUR", "distance_km": 20, "travel_minutes": 25, "track_count": 2 },
+    { "from": "KUR", "to": "BAM", "distance_km": 165, "travel_minutes": 140, "track_count": 2 },
+    { "from": "BAM", "to": "VSKP", "distance_km": 280, "travel_minutes": 240, "track_count": 2 },
+
+    { "from": "TDL", "to": "LKO", "distance_km": 320, "travel_minutes": 260, "track_count": 2 },
+    { "from": "LKO", "to": "BSB", "distance_km": 310, "travel_minutes": 250, "track_count": 2 },
+    { "from": "BSB", "to": "DDU", "distance_km": 18, "travel_minutes": 25, "track_count": 3 }
+  ],
+
+  "constraints": {
+    "min_headway_minutes": 10,
+    "min_dwell_minutes": 2,
+    "max_dwell_minutes": 30
+  }
+}
