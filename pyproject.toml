@@ -1,0 +1,22 @@
+[project]
+name = "indian-railway-scheduling"
+version = "0.1.0"
+description = "Indian Railway AI Agent Environment for OpenEnv"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "gradio",
+    "fastapi",
+    "uvicorn",
+    "requests",
+    "openenv",
+    # Add any other libraries your agent needs here (e.g., "torch", "numpy")
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["my_env*"]
